@@ -291,6 +291,8 @@ abstract class OAuth2 extends AbstractAdapter implements AdapterInterface
         $refreshToken = $this->getStoredData('refresh_token');
         if (!empty($refreshToken)) {
             $this->tokenRefreshParameters = [
+                'client_id' => $this->clientId,
+                'client_secret' => $this->clientSecret,
                 'grant_type' => 'refresh_token',
                 'refresh_token' => $refreshToken,
             ];
