@@ -83,7 +83,9 @@ abstract class AbstractAdapter implements AdapterInterface
     protected $validateApiResponseHttpCode = true;
 
     /**
-     * @var mixed : used for testing purpose to specify filter_input behaviours
+     * Used for testing purpose to specify filter_input behaviours
+     *
+     * @var FilterService
      */
     protected static $filterService;
 
@@ -97,9 +99,9 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function __construct(
         $config = [],
-        HttpClientInterface $httpClient = null,
-        StorageInterface $storage = null,
-        LoggerInterface $logger = null
+        ?HttpClientInterface $httpClient = null,
+        ?StorageInterface $storage = null,
+        ?LoggerInterface $logger = null
     ) {
         $this->providerId = (new \ReflectionClass($this))->getShortName();
 
@@ -248,7 +250,7 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function setHttpClient(HttpClientInterface $httpClient = null)
+    public function setHttpClient(?HttpClientInterface $httpClient = null)
     {
         $this->httpClient = $httpClient ?: new HttpClient();
 
@@ -268,7 +270,7 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function setStorage(StorageInterface $storage = null)
+    public function setStorage(?StorageInterface $storage = null)
     {
         $this->storage = $storage ?: new Session();
     }
@@ -284,7 +286,7 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function setLogger(LoggerInterface $logger = null)
+    public function setLogger(?LoggerInterface $logger = null)
     {
         $this->logger = $logger ?: new Logger(
             $this->config->get('debug_mode'),
@@ -386,14 +388,14 @@ abstract class AbstractAdapter implements AdapterInterface
      * https://php.net/manual/en/function.filter-input.php
      */
     public function filterInput($type, $var_name, $filter = FILTER_DEFAULT, $options = 0) {
-        if (isset(self::$filterService)){
+        if (!isset(self::$filterService)) {
             self::$filterService = new FilterService();
         }
         return self::$filterService->filterInput($type, $var_name, $filter, $options);
     }
 
     /**
-     * @param \Hybridauth\Adapter\FilterService|null $filterService
+     * @param FilterService|null $filterService
      *
      * @return void
      */

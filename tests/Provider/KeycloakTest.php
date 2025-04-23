@@ -15,7 +15,7 @@ class KeycloakTest extends \PHPUnit\Framework\TestCase
         //Mock OAuth2 Api request
         $keycloak = $this->getMockBuilder(Keycloak::class)
             ->disableOriginalConstructor()
-            ->setMethods(['apiRequest'])
+            ->onlyMethods(['apiRequest'])
             ->getMock();
         $keycloak->expects($this->once())
             ->method('apiRequest')
@@ -55,7 +55,7 @@ class KeycloakTest extends \PHPUnit\Framework\TestCase
         //Mock OAuth2 Api request
         $keycloak = $this->getMockBuilder(Keycloak::class)
             ->disableOriginalConstructor()
-            ->setMethods(['apiRequest'])
+            ->onlyMethods(['apiRequest'])
             ->getMock();
         $keycloak->expects($this->once())
             ->method('apiRequest')
