@@ -107,8 +107,14 @@ class Keycloak extends OAuth2
 
         // Collect organization claim if provided in the IDToken
         if ($data->exists('organization')) {
-            $kc_orgs = array_keys((array) $data->get('organization'));
+            $orgs = (array)$data->get('organization');
+            $kc_orgs = array_keys($orgs);
             $userProfile->data['organization'] = array_shift($kc_orgs); //Get the first key
+            $userProfile->data['allowed_orgs'] = $orgs;
+        }
+
+        if ($data->exists('groups')) {
+            $userProfile->data['groups'] = (array)$data->get('groups');
         }
 
         return $userProfile;
