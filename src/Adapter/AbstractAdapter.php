@@ -83,6 +83,13 @@ abstract class AbstractAdapter implements AdapterInterface
     protected $validateApiResponseHttpCode = true;
 
     /**
+     * Whether to call logout API before disconnecting
+     *
+     * @var bool
+     */
+    protected $isLogoutRequiredBeforeDisconnect = false;
+
+    /**
      * Used for testing purpose to specify filter_input behaviours
      *
      * @var FilterService
@@ -204,7 +211,20 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function disconnect()
     {
+        if ($this->isLogoutRequiredBeforeDisconnect){
+            $resp = $this->logout();
+            $this->logger->debug("logout", [$resp]);
+        }
+
         $this->clearStoredData();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function logout()
+    {
+        return false;
     }
 
     /**

@@ -119,4 +119,11 @@ class Keycloak extends OAuth2
 
         return $userProfile;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function logout() {
+        return $this->apiRequest('logout', 'POST', $this->tokenRefreshParameters);
+    }
 }
