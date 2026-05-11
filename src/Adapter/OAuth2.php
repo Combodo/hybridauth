@@ -271,6 +271,10 @@ abstract class OAuth2 extends AbstractAdapter implements AdapterInterface
         if ($this->config->exists('logout_before_disconnect')) {
             $this->isLogoutRequiredBeforeDisconnect = $this->config->get('logout_before_disconnect');
         }
+
+        if ($this->config->exists('provide_all_getuserprofile_ouput')) {
+            $this->provideAllGetUserProfileResponseInData = $this->config->get('provide_all_getuserprofile_ouput');
+        }
     }
 
     /**
