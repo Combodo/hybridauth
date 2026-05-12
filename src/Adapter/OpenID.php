@@ -201,7 +201,7 @@ abstract class OpenID extends AbstractAdapter implements AdapterInterface
     {
         $data = new Data\Collection($openidAttributes);
 
-        $userProfile = new User\Profile();
+        $userProfile = $this->createNewUserProfile($data);
 
         $userProfile->identifier = $this->openIdClient->identity;
 

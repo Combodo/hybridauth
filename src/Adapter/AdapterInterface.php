@@ -7,6 +7,7 @@
 
 namespace Hybridauth\Adapter;
 
+use Hybridauth\Data\Collection;
 use Hybridauth\HttpClient\HttpClientInterface;
 use Hybridauth\Storage\StorageInterface;
 use Hybridauth\Logger\LoggerInterface;
@@ -55,6 +56,13 @@ interface AdapterInterface
      * @return \Hybridauth\User\Contact[]
      */
     public function getUserContacts();
+
+    /**
+     * @param \Hybridauth\Data\Collection $data
+     *
+     * @return \Hybridauth\User\Profile
+     */
+    public function createNewUserProfile(Collection $data);
 
     /**
      * Retrieve the connected user pages|companies|groups list
