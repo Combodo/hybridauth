@@ -118,10 +118,6 @@ class Keycloak extends OAuth2
             $userProfile->data['groups'] = (array)$data->get('groups');
         }
 
-        if ($this->provideAllGetUserProfileResponseInData) {
-            $userProfile->data = array_merge($dataAsArray, $userProfile->data);
-        }
-
         return $userProfile;
     }
 
