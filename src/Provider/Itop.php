@@ -20,7 +20,7 @@ class Itop extends OAuth2
 	/**
 	 * {@inheritdoc}
 	 */
-	protected $scope = 'REST/JSON Synchro Oauth2/GetUser';
+	protected $scope = 'REST/JSON,Synchro,Oauth2/GetUser';
 
 	/**
 	 * {@inheritdoc}
